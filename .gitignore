@@ -9,6 +9,9 @@ npm-debug.log*
 # Environment variables
 .env
 
+# Resume Uploads
+uploads/
+
 # Build output
 dist/
 build/
