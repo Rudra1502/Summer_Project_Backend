@@ -11,7 +11,7 @@ class AuthService {
     required String userName,
     required String email,
     required String phoneNumber,
-    required String password,
+    required String password, required String resumeLink, required String bio, required List<String> skills
   }) async {
     print('First Name: $firstName');
 print('Last Name: $lastName');
@@ -30,6 +30,9 @@ print('Phone Number: $phoneNumber');
           'email': email,
           'phoneNumber': phoneNumber,
           'password': password,
+          'resumeLink': resumeLink,
+          'bio': bio,
+          'skills': skills
         }),
       );
       print(response);

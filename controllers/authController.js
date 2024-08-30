@@ -9,12 +9,15 @@ const jwt = require('jsonwebtoken');
 // @route   POST /api/auth/register
 // @access  Public
 exports.registerUser = async (req, res) => {
-    const { firstName, lastName, userName, email, phoneNumber, password} = req.body;
+    const { firstName, lastName, userName, email, phoneNumber, password, resumeLink, bio, skills } = req.body;
 
     try {
-        // Check if user with email or username or phone number already exists
+        // Check if user with email, username, or phone number already exists
         const existingUser = await User.findOne({ $or: [{ email }, { userName }, { phoneNumber }] });
-        if (existingUser) return res.status(400).json({ msg: 'User with given email, username or phone number already exists' });
+        if (existingUser) {
+            console.log('User already exists');
+            return res.status(400).json({ msg: 'User with given email, username, or phone number already exists' });
+        }
 
         // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -27,14 +30,17 @@ exports.registerUser = async (req, res) => {
             email,
             phoneNumber,
             password: hashedPassword,
+            resumeLink,
+            bio,
+            skills,
         });
 
         // Save the user to the database
         await user.save();
-
+        console.log('User registered successfully');
         res.status(201).json({ msg: 'User registered successfully' });
     } catch (error) {
-        console.error(error);
+        console.error('Error occurred during registration:', error);
         res.status(500).send('Server error');
     }
 };

@@ -8,8 +8,8 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  String _userName = "John Doe"; // Example user name
-  String _email = "john.doe@example.com"; // Example email
+  String _userName = "Rudra Suthar"; // Example user name
+  String _email = "rudrasuthar04@gmail.com"; // Example email
   String _profileImagePath =
       "assets/profile_placeholder.png"; // Placeholder image path
   List<String> _completedJobs = [

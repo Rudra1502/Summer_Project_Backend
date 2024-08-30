@@ -28,10 +28,11 @@ class _TLoginFormState extends State<TLoginForm> {
     if (_formKey.currentState!.validate()) {
       final email = _emailController.text.trim();
       final password = _passwordController.text.trim();
-
+      print(email);
+      print(password);
       final token = await _authService.loginUser(email, password);
       if (token != null) {
-        Get.offAll(() => MainPage());
+        
       } else {
         setState(() {
           _errorMessage = 'Invalid credentials';
@@ -48,12 +49,15 @@ class _TLoginFormState extends State<TLoginForm> {
         child: Column(
           children: [
             TextFormField(
+              controller: _emailController,
               decoration: const InputDecoration(
                   prefixIcon: Icon(Iconsax.direct_right),
                   labelText: TTexts.email),
             ),
             const SizedBox(height: TSizes.spaceBtwInputFields),
             TextFormField(
+              obscureText: true,
+              controller: _passwordController,
               decoration: const InputDecoration(
                 prefixIcon: Icon(Iconsax.password_check),
                 labelText: TTexts.password,
@@ -83,7 +87,7 @@ class _TLoginFormState extends State<TLoginForm> {
               child: ElevatedButton(
                   onPressed: () {
                     _handleLogin();
-                    
+                    Get.offAll(() => MainPage());
                   },
                   child: const Text(TTexts.signIn)),
             ),

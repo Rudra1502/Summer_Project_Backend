@@ -183,25 +183,7 @@ class _MainPageState extends State<MainPage> {
               ),
             ),
           ),
-          // Card(
-          //   elevation: 4,
-          //   shape: RoundedRectangleBorder(
-          //     borderRadius: BorderRadius.circular(15),
-          //   ),
-          //   child: ListTile(
-          //     title: Text("Web Developer Needed for E-commerce Platform"),
-          //     subtitle: Text("Description: Looking for an experienced web developer to build a responsive e-commerce platform. Must have expertise in React, Node.js, and MongoDB."),
-          //     trailing: ElevatedButton(
-          //       onPressed: () {},
-          //       child: Text("Apply"),
-          //       style: ElevatedButton.styleFrom(
-          //         shape: RoundedRectangleBorder(
-          //           borderRadius: BorderRadius.circular(10),
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
+          
         ],
       ),
     );

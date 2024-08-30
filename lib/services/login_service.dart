@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class AuthService {
-  final String baseUrl = 'http://192.168.64.41:5001/api/auth'; // Replace with your actual backend URL
+  final String baseUrl = 'http://192.168.65.121:5001/api/auth'; // Replace with your actual backend URL
 
   Future<String?> loginUser(String email, String password) async {
     try {
