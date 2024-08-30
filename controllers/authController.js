@@ -2,18 +2,34 @@ const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+
+
+
 // @desc    Register a user
 // @route   POST /api/auth/register
 // @access  Public
 exports.registerUser = async (req, res) => {
-    const { name, email, password } = req.body;
+    const { firstName, lastName, userName, email, phoneNumber, password} = req.body;
 
     try {
-        const existingUser = await User.findOne({ email });
-        if (existingUser) return res.status(400).json({ msg: 'User already exists' });
+        // Check if user with email or username or phone number already exists
+        const existingUser = await User.findOne({ $or: [{ email }, { userName }, { phoneNumber }] });
+        if (existingUser) return res.status(400).json({ msg: 'User with given email, username or phone number already exists' });
 
+        // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10);
-        const user = new User({ name, email, password: hashedPassword });
+
+        // Create the new user
+        const user = new User({
+            firstName,
+            lastName,
+            userName,
+            email,
+            phoneNumber,
+            password: hashedPassword,
+        });
+
+        // Save the user to the database
         await user.save();
 
         res.status(201).json({ msg: 'User registered successfully' });
@@ -22,6 +38,7 @@ exports.registerUser = async (req, res) => {
         res.status(500).send('Server error');
     }
 };
+
 
 // @desc    Authenticate user & get token
 // @route   POST /api/auth/login
